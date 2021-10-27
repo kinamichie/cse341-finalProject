@@ -24,6 +24,9 @@ const ta02Routes = require('./routes/ta02');
 const ta03Routes = require('./routes/ta03');
 const ta04Routes = require('./routes/ta04');
 
+// const authenticationRoutes = require('./routes/auth');
+// app.use(authenticationRoutes);
+
 app
   .use(express.static(path.join(__dirname, 'public')))
   .set('views', path.join(__dirname, 'views'))
@@ -38,6 +41,8 @@ app
   .use('/ta02', ta02Routes)
   .use('/ta03', ta03Routes)
   .use('/ta04', ta04Routes)
+
+
   .get('/', (req, res, next) => {
     // This is the primary index, always handled last.
     res.render('pages/index', {
@@ -45,8 +50,12 @@ app
       path: '/',
     });
   })
+ 
   .use((req, res, next) => {
     // 404 page
     res.render('pages/404', { title: '404 - Page Not Found', path: req.url });
   })
-  .listen(PORT, () => console.log(`Listening on ${PORT}`));
+  .listen(PORT, () => console.log(`Listening on ${PORT}`)); 
+
+
+
